@@ -1,3 +1,5 @@
+## This code is outdated, it was built to work with the previous API version.
+
 from datetime import datetime, timedelta
 import requests, json
 
@@ -274,6 +276,7 @@ class Connection(Cache):
     #     response = requests.get(self.api_key + query).json()
     #     return response
 
+#_______________________________________________________________________________________________________
 
 if __name__ == '__main__':
     con = Connection()
