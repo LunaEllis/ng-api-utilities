@@ -4,6 +4,7 @@ A Python module to make communicating with the NetherGames REST API easier and m
 NOTE: I highly recommend reading through the documentation for the NG REST API, which can be read at [this link](
 https://support.nethergames.org/en-au/article/rest-api-documentation-1wf73dq/),
       just so you understand what each api request is doing.
+      Additionally, please read the [Integration Setup Guide](https://github.com/LunaEllis/ng-api-utilities/blob/main/Integration%20Setup%20Guide.md) if you're developing a larger project and unsure of what an integration is.
 
 # IN THIS MODULE:
 - Class Connection
