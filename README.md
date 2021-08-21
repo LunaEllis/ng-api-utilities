@@ -1,8 +1,9 @@
 # NG - API Utilities
-A Python module to make communicating with the NetherGames API easier and more streamlined.
+A Python module to make communicating with the NetherGames REST API easier and more streamlined.
 
-NOTE: I highly recommend reading through the documentation for NG ApiV2, which can be read at [https://support.nethergames.org/en-au/article/v2-public-endpoints-1eqxbon/],
-      just so you understand what each api call is doing.
+NOTE: I highly recommend reading through the documentation for the NG REST API, which can be read at [this link](
+https://support.nethergames.org/en-au/article/rest-api-documentation-1wf73dq/),
+      just so you understand what each api request is doing.
 
 # IN THIS MODULE:
 - Class Connection
@@ -11,7 +12,10 @@ NOTE: I highly recommend reading through the documentation for NG ApiV2, which c
 - Class Log
 - Class Cache
 
+- Method get_auth_key
+
 _Editor's Note: All classes will contain the attributes and methods of inherited classes, but they won't be written down here._
+
 
 # Class Connection:
 // inherits from class Cache
@@ -20,7 +24,7 @@ _Editor's Note: All classes will contain the attributes and methods of inherited
 - Takes parameters:
   - cache { = True }
     - If True, opens the cache file and reads/writes player data from the cache.
-  - grace { = 10 }
+  - grace { = 15 }
     - Defines the length of time (in minutes) that cache entires will be considered 'useable'.
     - After the grace period, entries in the cache will be considered 'obsolete', and won't be useable.
 
@@ -34,6 +38,12 @@ _Editor's Note: All classes will contain the attributes and methods of inherited
     - Only used if cache is set to True.
 
 - Methods:
+  - base_call
+    - Paramaters: _query_, _json_: True
+    - Method makes the GET request using the passed query, and returns the response (as json, if bool _json_ is set to false
+  - cache_call
+    - Paramaters: _query_, _json_: True
+    - Method passes paramaters to base_call, then writes the response to the cache and returns it
   - test_connection
     - Paramaters: _None_
     - Sends a server stats request to NG. If successful, returns a dict of the response.
@@ -52,14 +62,14 @@ _Editor's Note: All classes will contain the attributes and methods of inherited
   - leaderboard
     - Paramaters: _board_, _game_: None, _column_: None, _scope_: None, _limit_: 100
     - Makes a leaderboard request using the inputted data.
-    - Read [https://support.nethergames.org/en-au/article/v2-public-endpoints-1eqxbon/#3-public-leaderboards-data] for more detail on how this works.
+    - Read [this article](https://support.nethergames.org/en-au/article/rest-api-documentation-1wf73dq/#3-get-v1leaderboard) for more detail on how this works.
   - server_announcements
     - Paramaters: _form_, _limit_: 100
-    - Pulls the server announcements of the specified form, to the specified limit.
-  - discord_announcements
-    - API FEATURE CURRENTLY DISABLED BY NG
-    - Paramaters: _limit_: 100
-    - Pulls the discord announcements, to the specified limit.
+    - Pulls the server/discord announcements of the specified form, to the specified limit.
+  - player_avatar
+    - Paramaters: _ign_
+    - Gets the avatar for the specified ign.
+    - _Response is in the 64x64 image/png format_
 
 
 # Class BaseLog
