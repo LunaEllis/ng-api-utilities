@@ -183,17 +183,7 @@ class Cache(BaseLog):
         self.write_file(string)
         return 1
 
-      
 #_____________________________________________________________________________________________________________________
-
-
-# Code snippet gets API auth key from text file.
-# -- GUIDE to setup API auth key in GitHub Repository --
-def get_auth_key():
-    with open("auth_key.txt", "r+") as f:
-        key = f.readline().strip()
-        f.close()
-    return key
 
 
 # Conection Class (inherits from Cache)
@@ -205,12 +195,21 @@ class Connection(Cache):
     # If test fails, rasies an exception
     def __init__(self, auth_key=get_auth_key(), cache=True, grace=15):
         self.api_key = "http://apiv2.nethergames.org"
-        self.auth_key = auth_key
+        self.auth_key = self.auth_key()
         self.test_connection()
 
         self.cache = cache
         if cache:
             super().__init__(grace)
+
+    # Get Auth Key method
+    # Returns API auth key from text file.
+    # -- GUIDE to setup API auth key in GitHub Repository --
+    def get_auth_key(self):
+        with open("auth_key.txt", "r+") as f:
+            key = f.readline().strip()
+            f.close()
+        return key
 
     # Base Call method
     # Performs a request using the passed query
@@ -310,10 +309,7 @@ class Connection(Cache):
         return r
 
 
-#____________________________________________________________________________________________________
-
-
+#__________
 if __name__ == '__main__':
     con = Connection()
     print(con.test_connection())
-    print(con.player_avatar("Luna Ellis7515"))
